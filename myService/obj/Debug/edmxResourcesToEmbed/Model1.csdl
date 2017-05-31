@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CustomerSet">
+    <Key>
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="CustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Saldo" Type="Double" Nullable="false" />
+    <NavigationProperty Name="OrderSet" Relationship="Self.FK_CustomerOrder" FromRole="CustomerSet" ToRole="OrderSet" />
+  </EntityType>
+  <EntityType Name="OrderEntrySet">
+    <Key>
+      <PropertyRef Name="OrderEntryId" />
+    </Key>
+    <Property Name="OrderEntryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Aantal" Type="Int64" Nullable="false" />
+    <Property Name="Order_OrderId" Type="Int32" Nullable="false" />
+    <Property Name="Product_ProductId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="OrderSet" Relationship="Self.FK_OrderOrderEntry" FromRole="OrderEntrySet" ToRole="OrderSet" />
+    <NavigationProperty Name="ProductSet" Relationship="Self.FK_ProductOrderEntry" FromRole="OrderEntrySet" ToRole="ProductSet" />
+  </EntityType>
+  <EntityType Name="OrderSet">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Customer_CustomerId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CustomerSet" Relationship="Self.FK_CustomerOrder" FromRole="OrderSet" ToRole="CustomerSet" />
+    <NavigationProperty Name="OrderEntrySet" Relationship="Self.FK_OrderOrderEntry" FromRole="OrderSet" ToRole="OrderEntrySet" />
+  </EntityType>
+  <EntityType Name="ProductSet">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <NavigationProperty Name="OrderEntrySet" Relationship="Self.FK_ProductOrderEntry" FromRole="ProductSet" ToRole="OrderEntrySet" />
+  </EntityType>
+  <Association Name="FK_CustomerOrder">
+    <End Role="CustomerSet" Type="Self.CustomerSet" Multiplicity="1" />
+    <End Role="OrderSet" Type="Self.OrderSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CustomerSet">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="OrderSet">
+        <PropertyRef Name="Customer_CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderOrderEntry">
+    <End Role="OrderSet" Type="Self.OrderSet" Multiplicity="1" />
+    <End Role="OrderEntrySet" Type="Self.OrderEntrySet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderSet">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="OrderEntrySet">
+        <PropertyRef Name="Order_OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductOrderEntry">
+    <End Role="ProductSet" Type="Self.ProductSet" Multiplicity="1" />
+    <End Role="OrderEntrySet" Type="Self.OrderEntrySet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductSet">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="OrderEntrySet">
+        <PropertyRef Name="Product_ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="StoreEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CustomerSet" EntityType="Self.CustomerSet" />
+    <EntitySet Name="OrderEntrySet" EntityType="Self.OrderEntrySet" />
+    <EntitySet Name="OrderSet" EntityType="Self.OrderSet" />
+    <EntitySet Name="ProductSet" EntityType="Self.ProductSet" />
+    <AssociationSet Name="FK_CustomerOrder" Association="Self.FK_CustomerOrder">
+      <End Role="CustomerSet" EntitySet="CustomerSet" />
+      <End Role="OrderSet" EntitySet="OrderSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderOrderEntry" Association="Self.FK_OrderOrderEntry">
+      <End Role="OrderSet" EntitySet="OrderSet" />
+      <End Role="OrderEntrySet" EntitySet="OrderEntrySet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductOrderEntry" Association="Self.FK_ProductOrderEntry">
+      <End Role="ProductSet" EntitySet="ProductSet" />
+      <End Role="OrderEntrySet" EntitySet="OrderEntrySet" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

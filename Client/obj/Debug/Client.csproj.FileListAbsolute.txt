@@ -1,0 +1,10 @@
+C:\Users\Kelvin\Documents\Visual Studio 2017\Projects\myService\Client\bin\Debug\Client.exe.config
+C:\Users\Kelvin\Documents\Visual Studio 2017\Projects\myService\Client\bin\Debug\Client.exe
+C:\Users\Kelvin\Documents\Visual Studio 2017\Projects\myService\Client\bin\Debug\Client.pdb
+C:\Users\Kelvin\Documents\Visual Studio 2017\Projects\myService\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache
+C:\Users\Kelvin\Documents\Visual Studio 2017\Projects\myService\Client\obj\Debug\Client.Properties.Resources.resources
+C:\Users\Kelvin\Documents\Visual Studio 2017\Projects\myService\Client\obj\Debug\Client.csproj.GenerateResource.Cache
+C:\Users\Kelvin\Documents\Visual Studio 2017\Projects\myService\Client\obj\Debug\Client.exe
+C:\Users\Kelvin\Documents\Visual Studio 2017\Projects\myService\Client\obj\Debug\Client.pdb
+C:\Users\Kelvin\Documents\Visual Studio 2017\Projects\myService\Client\obj\Debug\Client.Items.resources
+C:\Users\Kelvin\Documents\Visual Studio 2017\Projects\myService\Client\obj\Debug\Client.Login.resources

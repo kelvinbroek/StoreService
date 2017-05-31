@@ -1,0 +1,10 @@
+c:\users\kelvin\documents\visual studio 2017\Projects\myService\myService\bin\Debug\myService.dll.config
+c:\users\kelvin\documents\visual studio 2017\Projects\myService\myService\bin\Debug\myService.dll
+c:\users\kelvin\documents\visual studio 2017\Projects\myService\myService\bin\Debug\myService.pdb
+c:\users\kelvin\documents\visual studio 2017\Projects\myService\myService\obj\Debug\myService.csprojResolveAssemblyReference.cache
+c:\users\kelvin\documents\visual studio 2017\Projects\myService\myService\obj\Debug\myService.dll
+c:\users\kelvin\documents\visual studio 2017\Projects\myService\myService\obj\Debug\myService.pdb
+C:\Users\Kelvin\Documents\Visual Studio 2017\Projects\myService\myService\bin\Debug\EntityFramework.dll
+C:\Users\Kelvin\Documents\Visual Studio 2017\Projects\myService\myService\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Kelvin\Documents\Visual Studio 2017\Projects\myService\myService\bin\Debug\EntityFramework.xml
+C:\Users\Kelvin\Documents\Visual Studio 2017\Projects\myService\myService\bin\Debug\EntityFramework.SqlServer.xml

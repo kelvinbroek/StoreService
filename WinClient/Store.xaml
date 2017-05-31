@@ -1,0 +1,27 @@
+﻿<Window x:Class="WinClient.Store"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WinClient"
+        mc:Ignorable="d"
+        Title="Store" Height="300" Width="300">
+    <Grid Margin="0,0,3.6,-19.6">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="14*"/>
+        </Grid.RowDefinitions>
+        <ListBox Name="items" HorizontalAlignment="Left" Height="153" Margin="152,41,0,0" VerticalAlignment="Top" Width="128" Grid.RowSpan="2"/>
+        <ListView HorizontalAlignment="Left" Height="153" Margin="20,41,0,0" VerticalAlignment="Top" Width="100" Grid.RowSpan="2">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Name="saldoLabel" Content="Saldo: " HorizontalAlignment="Left" Margin="20,71.4,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Button Content="Buy" HorizontalAlignment="Left" Margin="131,77.4,0,0" Grid.Row="1" VerticalAlignment="Top" Width="67"/>
+        <Button Content="Refresh" HorizontalAlignment="Left" Margin="215,77.4,0,0" Grid.Row="1" VerticalAlignment="Top" Width="65"/>
+
+    </Grid>
+</Window>
