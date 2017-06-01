@@ -63,7 +63,8 @@
     </Compile>
     <Compile Include="CustomerController.cs" />
     <Compile Include="Models\CustomerModel.cs" />
-    <Compile Include="ProductModel.cs" />
+    <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="ProductController.cs" />
     <Compile Include="Store.xaml.cs">
       <DependentUpon>Store.xaml</DependentUpon>
     </Compile>

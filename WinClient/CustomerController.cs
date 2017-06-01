@@ -32,7 +32,12 @@ namespace WinClient
                 return true;
             }
 
-            return false;       
+            return false;
+        }
+
+        public double GetSaldo(string username)
+        {
+            return client.GetSaldo(username);
         }
     }
 }

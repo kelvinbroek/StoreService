@@ -21,13 +21,13 @@ namespace myService
         List<ProductDTO> GetAllProducts();
 
         [OperationContract]
-        Boolean BuyProduct(int aantal, int product, int customerId);
+        Boolean BuyProduct(int aantal, int product, string username);
 
         [OperationContract]
-        List<ProductDTO> GetMyInventory(int customerId);
+        List<ProductDTO> GetMyInventory(string username);
 
         [OperationContract]
-        double GetSaldo(int customerId);
+        double GetSaldo(string username);
     }
 
 
@@ -43,6 +43,9 @@ namespace myService
 
         [DataMember]
         public double Price { get; set; }
+
+        [DataMember]
+        public int Stock { get; set; }
     }
 
     [DataContract]

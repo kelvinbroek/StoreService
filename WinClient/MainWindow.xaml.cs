@@ -34,6 +34,8 @@ namespace WinClient
             if (result)
             {
                 Store itembox = new Store();
+                itembox.LoggedUser.Content = Username.Text;
+                itembox.saldoLabel.Content = customerController.GetSaldo(itembox.LoggedUser.Content.ToString());
                 itembox.Show();
             }
             else

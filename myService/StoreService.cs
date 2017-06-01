@@ -58,21 +58,22 @@ namespace myService
                                select p;
                 foreach (Products product in products)
                 {
-                    list.Add(new ProductDTO { Name = product.Name, Price = product.Price });
+                    list.Add(new ProductDTO { Name = product.Name, Price = product.Price, Stock = product.Aantal});
                 }
 
                 return list;
             }
         }
 
-        public bool BuyProduct(int aantal, int chosenProduct, int customerId)
+        public bool BuyProduct(int aantal, int chosenProduct, string username)
         {
             try
             {
                 using (Entities ctx = new Entities())
                 {
+                    Customers customer = ctx.Customers.FirstOrDefault(c => c.Username == username);
                     Orders orderlist =
-                        ctx.Orders.FirstOrDefault(p => p.CustomerId == customerId && p.ProductId == chosenProduct);
+                        ctx.Orders.FirstOrDefault(p => p.CustomerId == customer.CustomerId && p.ProductId == chosenProduct);
 
                     if (orderlist != null)
                     {
@@ -82,14 +83,14 @@ namespace myService
                     {
                         Orders newOrderList = new Orders
                         {
-                            CustomerId = customerId,
+                            CustomerId = customer.CustomerId,
                             ProductId = chosenProduct,
                             Aantal = aantal
                         };
                         ctx.Orders.Add(newOrderList);
                     }
 
-                    Customers customer = ctx.Customers.FirstOrDefault(p => p.CustomerId == customerId);
+//                    Customers customer = ctx.Customers.FirstOrDefault(p => p.CustomerId == customerId);
                     Products product = ctx.Products.FirstOrDefault(p => p.ProductId == chosenProduct);
 
                     customer.Saldo = customer.Saldo - (product.Price * aantal);
@@ -106,29 +107,31 @@ namespace myService
             }
         }
 
-        public List<ProductDTO> GetMyInventory(int customerId)
+        public List<ProductDTO> GetMyInventory(string username)
         {
             using (Entities ctx = new Entities())
             {
-                var orders = ctx.Orders.Where(o => o.CustomerId == customerId);
+                Customers customer = ctx.Customers.FirstOrDefault(c => c.Username == username);
+
+                var orders = ctx.Orders.Where(o => o.CustomerId == customer.CustomerId);
 
                 List<ProductDTO> list = new List<ProductDTO>();
 
                 foreach (var product in orders)
                 {
                     Products item = ctx.Products.FirstOrDefault(i => i.ProductId == product.ProductId);
-                    list.Add(new ProductDTO { Name = item.Name, Price = item.Price });
+                    list.Add(new ProductDTO { Name = item.Name, Price = item.Price, Stock = item.Aantal});
                 }
 
                 return list;
             }
         }
 
-        public double GetSaldo(int customerId)
+        public double GetSaldo(string username)
         {
             using (Entities ctx = new Entities())
             {
-                Customers customer = ctx.Customers.FirstOrDefault(p => p.CustomerId == customerId);
+                Customers customer = ctx.Customers.FirstOrDefault(p => p.Username == username);
                 return customer.Saldo;
             }
         }

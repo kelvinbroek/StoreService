@@ -23,17 +23,16 @@ namespace WinClient
         {
             InitializeComponent();
 
-            ServiceReference.IStoreService client = new ServiceReference.StoreServiceClient();
-            
-            var products = client.GetAllProducts();
-            List<ProductModel> models = new List<ProductModel>();
+            CustomerController customerController = new CustomerController();
+            ProductController productController = new ProductController();
 
-            for (int i = 0; i < products.Length; i++)
+            List<ProductModel> stockProducts = productController.GetAllProducts();
+            List<ProductModel> myProducts = productController.GetMyInventory();
+
+            for (int i = 0; i < stockProducts.Count; i++)
             {
-                models.Add(new ProductModel {Name = products[i].Name, Price = products[i].Price});
-                items.Items.Add(new TextBox().Text = products[i].Name);
+                items.Items.Add(new TextBox().Text = stockProducts[i].Name + "         " + stockProducts[i].Stock);
             }
-            saldoLabel.Content = "300";
         }
     }
 }

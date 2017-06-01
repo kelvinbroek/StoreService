@@ -105,6 +105,9 @@ namespace WinClient.ServiceReference {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private double PriceField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int StockField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -141,6 +144,19 @@ namespace WinClient.ServiceReference {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Stock {
+            get {
+                return this.StockField;
+            }
+            set {
+                if ((this.StockField.Equals(value) != true)) {
+                    this.StockField = value;
+                    this.RaisePropertyChanged("Stock");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -172,6 +188,24 @@ namespace WinClient.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStoreService/GetAllProducts", ReplyAction="http://tempuri.org/IStoreService/GetAllProductsResponse")]
         System.Threading.Tasks.Task<WinClient.ServiceReference.ProductDTO[]> GetAllProductsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStoreService/BuyProduct", ReplyAction="http://tempuri.org/IStoreService/BuyProductResponse")]
+        bool BuyProduct(int aantal, int product, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStoreService/BuyProduct", ReplyAction="http://tempuri.org/IStoreService/BuyProductResponse")]
+        System.Threading.Tasks.Task<bool> BuyProductAsync(int aantal, int product, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStoreService/GetMyInventory", ReplyAction="http://tempuri.org/IStoreService/GetMyInventoryResponse")]
+        WinClient.ServiceReference.ProductDTO[] GetMyInventory(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStoreService/GetMyInventory", ReplyAction="http://tempuri.org/IStoreService/GetMyInventoryResponse")]
+        System.Threading.Tasks.Task<WinClient.ServiceReference.ProductDTO[]> GetMyInventoryAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStoreService/GetSaldo", ReplyAction="http://tempuri.org/IStoreService/GetSaldoResponse")]
+        double GetSaldo(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStoreService/GetSaldo", ReplyAction="http://tempuri.org/IStoreService/GetSaldoResponse")]
+        System.Threading.Tasks.Task<double> GetSaldoAsync(string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -223,6 +257,30 @@ namespace WinClient.ServiceReference {
         
         public System.Threading.Tasks.Task<WinClient.ServiceReference.ProductDTO[]> GetAllProductsAsync() {
             return base.Channel.GetAllProductsAsync();
+        }
+        
+        public bool BuyProduct(int aantal, int product, string username) {
+            return base.Channel.BuyProduct(aantal, product, username);
+        }
+        
+        public System.Threading.Tasks.Task<bool> BuyProductAsync(int aantal, int product, string username) {
+            return base.Channel.BuyProductAsync(aantal, product, username);
+        }
+        
+        public WinClient.ServiceReference.ProductDTO[] GetMyInventory(string username) {
+            return base.Channel.GetMyInventory(username);
+        }
+        
+        public System.Threading.Tasks.Task<WinClient.ServiceReference.ProductDTO[]> GetMyInventoryAsync(string username) {
+            return base.Channel.GetMyInventoryAsync(username);
+        }
+        
+        public double GetSaldo(string username) {
+            return base.Channel.GetSaldo(username);
+        }
+        
+        public System.Threading.Tasks.Task<double> GetSaldoAsync(string username) {
+            return base.Channel.GetSaldoAsync(username);
         }
     }
 }
