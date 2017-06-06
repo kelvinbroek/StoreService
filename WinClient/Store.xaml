@@ -12,7 +12,7 @@
             <RowDefinition Height="14*"/>
         </Grid.RowDefinitions>
         <ListBox Name="items" HorizontalAlignment="Left" Height="153" Margin="152,41,0,0" VerticalAlignment="Top" Width="128" Grid.RowSpan="2"/>
-        <ListView HorizontalAlignment="Left" Height="153" Margin="20,41,0,0" VerticalAlignment="Top" Width="100" Grid.RowSpan="2">
+        <ListView Name="myItems" HorizontalAlignment="Left" Height="153" Margin="20,41,0,0" VerticalAlignment="Top" Width="100" Grid.RowSpan="2">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
@@ -20,10 +20,10 @@
             </ListView.View>
         </ListView>
         <Label Name="saldoLabel" Content="Saldo: " HorizontalAlignment="Left" Margin="20,71.4,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <Button Content="Buy" HorizontalAlignment="Left" Margin="117,82.4,0,0" Grid.Row="1" VerticalAlignment="Top" Width="67"/>
+        <Button Content="Buy" HorizontalAlignment="Left" Margin="117,82.4,0,0" Grid.Row="1" VerticalAlignment="Top" Width="67" Click="Button_Click"/>
         <Button Content="Refresh" HorizontalAlignment="Left" Margin="201,82.4,0,0" Grid.Row="1" VerticalAlignment="Top" Width="65" RenderTransformOrigin="0.079,1.207"/>
         <Label Grid.Row="0" Name="LoggedUser" HorizontalAlignment="Left" Margin="42,10,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="222,49.4,0,0" Grid.Row="1" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="44"/>
+        <TextBox Name="aantal" HorizontalAlignment="Left" Height="23" Margin="222,49.4,0,0" Grid.Row="1" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="44"/>
         <Label Content="Aantal" HorizontalAlignment="Left" Margin="174,46.4,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="-1.127,1.571"/>
 
     </Grid>

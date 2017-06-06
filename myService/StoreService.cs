@@ -65,15 +65,16 @@ namespace myService
             }
         }
 
-        public bool BuyProduct(int aantal, int chosenProduct, string username)
+        public bool BuyProduct(int aantal, string chosenProduct, string username)
         {
             try
             {
                 using (Entities ctx = new Entities())
                 {
                     Customers customer = ctx.Customers.FirstOrDefault(c => c.Username == username);
+                    Products pr = ctx.Products.FirstOrDefault(c => c.Name.Equals(chosenProduct));
                     Orders orderlist =
-                        ctx.Orders.FirstOrDefault(p => p.CustomerId == customer.CustomerId && p.ProductId == chosenProduct);
+                        ctx.Orders.FirstOrDefault(p => p.CustomerId == customer.CustomerId && p.ProductId == pr.ProductId);
 
                     if (orderlist != null)
                     {
@@ -84,17 +85,14 @@ namespace myService
                         Orders newOrderList = new Orders
                         {
                             CustomerId = customer.CustomerId,
-                            ProductId = chosenProduct,
+                            ProductId = pr.ProductId,
                             Aantal = aantal
                         };
                         ctx.Orders.Add(newOrderList);
                     }
 
-//                    Customers customer = ctx.Customers.FirstOrDefault(p => p.CustomerId == customerId);
-                    Products product = ctx.Products.FirstOrDefault(p => p.ProductId == chosenProduct);
-
-                    customer.Saldo = customer.Saldo - (product.Price * aantal);
-                    product.Aantal = product.Aantal - aantal;
+                    customer.Saldo = customer.Saldo - (pr.Price * aantal);
+                    pr.Aantal = pr.Aantal - aantal;
 
                     ctx.SaveChanges();
                 }
@@ -109,22 +107,21 @@ namespace myService
 
         public List<ProductDTO> GetMyInventory(string username)
         {
+            List<ProductDTO> list = new List<ProductDTO>();
+
             using (Entities ctx = new Entities())
             {
                 Customers customer = ctx.Customers.FirstOrDefault(c => c.Username == username);
 
-                var orders = ctx.Orders.Where(o => o.CustomerId == customer.CustomerId);
-
-                List<ProductDTO> list = new List<ProductDTO>();
-
-                foreach (var product in orders)
-                {
-                    Products item = ctx.Products.FirstOrDefault(i => i.ProductId == product.ProductId);
-                    list.Add(new ProductDTO { Name = item.Name, Price = item.Price, Stock = item.Aantal});
-                }
-
-                return list;
+                IEnumerable<ProductDTO> orders = from o in ctx.Orders
+                             where o.CustomerId == customer.CustomerId
+                             let pr = ctx.Products.FirstOrDefault(p => p.ProductId == o.ProductId)
+                             select new ProductDTO {Name = pr.Name, Stock = o.Aantal, Price = pr.Price};
+                
+                list.Add(new ProductDTO { Name = "Banana", Price = 2.0, Stock = 3});
+                list = orders.ToList();
             }
+            return list;
         }
 
         public double GetSaldo(string username)

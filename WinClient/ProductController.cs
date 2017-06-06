@@ -17,9 +17,31 @@ namespace WinClient
             var products = client.GetAllProducts();
             foreach (var product in products)
             {
-                models.Add(new ProductModel{Name = product.Name, Price = product.Price, Stock = product.Stock});
+                models.Add(new ProductModel { Name = product.Name, Price = product.Price, Stock = product.Stock });
             }
             return models;
+        }
+
+        public List<ProductModel> GetMyInventory(string s)
+        {
+            List<ProductModel> models = new List<ProductModel>();
+            var products = client.GetMyInventory(s);
+            foreach (var product in products)
+            {
+                models.Add(new ProductModel { Name = product.Name, Price = product.Price, Stock = product.Stock });
+            }
+            return models;
+        }
+
+        public bool BuyProduct(int aantal, string product, string username)
+        {
+            if (client.BuyProduct(aantal, product, username))
+            {
+                return true;
+            }
+
+            return false;
+
         }
     }
 }

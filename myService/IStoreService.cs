@@ -21,7 +21,7 @@ namespace myService
         List<ProductDTO> GetAllProducts();
 
         [OperationContract]
-        Boolean BuyProduct(int aantal, int product, string username);
+        Boolean BuyProduct(int aantal, string product, string username);
 
         [OperationContract]
         List<ProductDTO> GetMyInventory(string username);
@@ -38,6 +38,7 @@ namespace myService
     [DataContract]
     public class ProductDTO
     {
+
         [DataMember]
         public string Name { get; set; }
 
@@ -66,10 +67,13 @@ namespace myService
     public class OrderDTO
     {
         [DataMember]
-        public DateTime Date { get; set; }
+        public int CustomerId { get; set; }
 
         [DataMember]
-        public Guid CustomerId { get; set; }
+        public int Aantal { get; set; }
+
+        [DataMember]
+        public int ProductId { get; set; }
     }
 
 }

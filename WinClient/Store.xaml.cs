@@ -19,19 +19,38 @@ namespace WinClient
     /// </summary>
     public partial class Store : Window
     {
-        public Store()
+        CustomerController customerController = new CustomerController();
+        ProductController productController = new ProductController();
+        private IList<ProductModel> stockProducts;
+        private IList<ProductModel> myProducts;
+        public Store(string user)
         {
             InitializeComponent();
 
-            CustomerController customerController = new CustomerController();
-            ProductController productController = new ProductController();
+            LoggedUser.Content = user;
+            saldoLabel.Content = customerController.GetSaldo(LoggedUser.Content.ToString());
 
-            List<ProductModel> stockProducts = productController.GetAllProducts();
-            List<ProductModel> myProducts = productController.GetMyInventory();
+            stockProducts = productController.GetAllProducts();
+            myProducts = productController.GetMyInventory("" + LoggedUser.Content);
 
-            for (int i = 0; i < stockProducts.Count; i++)
+            foreach(ProductModel product in stockProducts)
             {
-                items.Items.Add(new TextBox().Text = stockProducts[i].Name + "         " + stockProducts[i].Stock);
+                items.Items.Add(new TextBox().Text = product.Name + "         " + product.Stock);
+            }
+
+            foreach (ProductModel product in myProducts)
+            {
+                myItems.Items.Add(new TextBox().Text = product.Name + "         " + product.Stock);
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string item = stockProducts[items.SelectedIndex].Name;
+            if (productController.BuyProduct(int.Parse(aantal.Text), item, LoggedUser.Content.ToString()))
+            {
+                saldoLabel.Content = customerController.GetSaldo(LoggedUser.Content.ToString());
+                myProducts = productController.GetMyInventory("" + LoggedUser.Content);
             }
         }
     }

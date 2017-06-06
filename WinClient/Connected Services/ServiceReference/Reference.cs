@@ -190,10 +190,10 @@ namespace WinClient.ServiceReference {
         System.Threading.Tasks.Task<WinClient.ServiceReference.ProductDTO[]> GetAllProductsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStoreService/BuyProduct", ReplyAction="http://tempuri.org/IStoreService/BuyProductResponse")]
-        bool BuyProduct(int aantal, int product, string username);
+        bool BuyProduct(int aantal, string product, string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStoreService/BuyProduct", ReplyAction="http://tempuri.org/IStoreService/BuyProductResponse")]
-        System.Threading.Tasks.Task<bool> BuyProductAsync(int aantal, int product, string username);
+        System.Threading.Tasks.Task<bool> BuyProductAsync(int aantal, string product, string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStoreService/GetMyInventory", ReplyAction="http://tempuri.org/IStoreService/GetMyInventoryResponse")]
         WinClient.ServiceReference.ProductDTO[] GetMyInventory(string username);
@@ -259,11 +259,11 @@ namespace WinClient.ServiceReference {
             return base.Channel.GetAllProductsAsync();
         }
         
-        public bool BuyProduct(int aantal, int product, string username) {
+        public bool BuyProduct(int aantal, string product, string username) {
             return base.Channel.BuyProduct(aantal, product, username);
         }
         
-        public System.Threading.Tasks.Task<bool> BuyProductAsync(int aantal, int product, string username) {
+        public System.Threading.Tasks.Task<bool> BuyProductAsync(int aantal, string product, string username) {
             return base.Channel.BuyProductAsync(aantal, product, username);
         }
         

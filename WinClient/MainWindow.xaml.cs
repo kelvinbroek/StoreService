@@ -33,10 +33,8 @@ namespace WinClient
             bool result = customerController.LoginUser(Username.Text, Password.Text);
             if (result)
             {
-                Store itembox = new Store();
-                itembox.LoggedUser.Content = Username.Text;
-                itembox.saldoLabel.Content = customerController.GetSaldo(itembox.LoggedUser.Content.ToString());
-                itembox.Show();
+                Store store = new Store(Username.Text);
+                store.Show();
             }
             else
             {
