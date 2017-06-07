@@ -14,3 +14,5 @@ C:\Users\Kelvin\Documents\Visual Studio 2017\Projects\myService\WinClient\obj\De
 C:\Users\Kelvin\Documents\Visual Studio 2017\Projects\myService\WinClient\obj\Debug\WinClient.pdb
 C:\Users\Kelvin\Documents\Visual Studio 2017\Projects\myService\WinClient\obj\Debug\Store.g.cs
 C:\Users\Kelvin\Documents\Visual Studio 2017\Projects\myService\WinClient\obj\Debug\Store.baml
+C:\Users\Kelvin\Documents\Visual Studio 2017\Projects\myService\WinClient\obj\Debug\Register.g.cs
+C:\Users\Kelvin\Documents\Visual Studio 2017\Projects\myService\WinClient\obj\Debug\Register.baml

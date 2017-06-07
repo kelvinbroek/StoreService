@@ -35,11 +35,18 @@ namespace WinClient
             {
                 Store store = new Store(Username.Text);
                 store.Show();
+                this.Close();
             }
             else
             {
                 LoginFailed.Content = "Incorrect login values";
             }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Register registerscreen = new Register();
+            registerscreen.Show();
         }
     }
 }

@@ -23,6 +23,7 @@ namespace WinClient
         ProductController productController = new ProductController();
         private IList<ProductModel> stockProducts;
         private IList<ProductModel> myProducts;
+
         public Store(string user)
         {
             InitializeComponent();
@@ -31,12 +32,40 @@ namespace WinClient
             saldoLabel.Content = customerController.GetSaldo(LoggedUser.Content.ToString());
 
             stockProducts = productController.GetAllProducts();
-            myProducts = productController.GetMyInventory("" + LoggedUser.Content);
-
-            foreach(ProductModel product in stockProducts)
+            
+            foreach (ProductModel product in stockProducts)
             {
                 items.Items.Add(new TextBox().Text = product.Name + "         " + product.Stock);
             }
+
+
+            FillMyInventory();
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var item = stockProducts[items.SelectedIndex];
+
+            if (!(int.Parse(saldoLabel.Content.ToString()) < (item.Price * int.Parse(aantal.Text))))
+            {
+                if (productController.BuyProduct(int.Parse(aantal.Text), item.Name, LoggedUser.Content.ToString()))
+                {
+                    saldoLabel.Content = customerController.GetSaldo(LoggedUser.Content.ToString());
+                    FillMyInventory();
+                }
+            }
+            else
+            {
+                Error.Content = "Te weinig saldo!";
+            }
+
+        }
+
+        private void FillMyInventory()
+        {
+            myProducts = productController.GetMyInventory("" + LoggedUser.Content);
+            myItems.Items.Clear();
 
             foreach (ProductModel product in myProducts)
             {
@@ -44,13 +73,14 @@ namespace WinClient
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            string item = stockProducts[items.SelectedIndex].Name;
-            if (productController.BuyProduct(int.Parse(aantal.Text), item, LoggedUser.Content.ToString()))
+            stockProducts = productController.GetAllProducts();
+            items.Items.Clear();
+
+            foreach (ProductModel product in stockProducts)
             {
-                saldoLabel.Content = customerController.GetSaldo(LoggedUser.Content.ToString());
-                myProducts = productController.GetMyInventory("" + LoggedUser.Content);
+                items.Items.Add(new TextBox().Text = product.Name + "         " + product.Stock);
             }
         }
     }

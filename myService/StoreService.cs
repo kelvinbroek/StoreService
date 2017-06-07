@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Security.Cryptography;
 using System.ServiceModel;
 using System.Text;
 
@@ -35,15 +36,16 @@ namespace myService
                 Customers exist = ctx.Customers.FirstOrDefault(u => u.Username == value);
                 if (exist == null)
                 {
+                    int pass = rnd.Next(0, 100);
                     Customers c = new Customers
                     {
                         Username = value,
-                        Password = "secret" + rnd.Next(0, 100),
+                        Password = "secret" + pass,
                         Saldo = 300
                     };
                     ctx.Customers.Add(c);
                     ctx.SaveChanges();
-                    return new CustomerDTO { Username = value, Password = "secret" + rnd.Next(0, 100), Saldo = 300 };
+                    return new CustomerDTO { Username = value, Password = "secret" + pass, Saldo = 300 };
                 }
             }
             return new CustomerDTO { Username = "exists", Password = "exists", Saldo = 0 };
@@ -55,6 +57,7 @@ namespace myService
             {
                 List<ProductDTO> list = new List<ProductDTO>();
                 var products = from p in ctx.Products
+                               where p.Aantal > 0
                                select p;
                 foreach (Products product in products)
                 {

@@ -13,6 +13,7 @@
         <TextBox Name="Password" HorizontalAlignment="Left" Height="29" Margin="216,152,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="168"/>
         <Button Content="Login" HorizontalAlignment="Left" Margin="412,246,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.298,0.192" Click="Button_Click"/>
         <Label Name="LoginFailed" Content="" HorizontalAlignment="Left" Margin="77,246,0,0" VerticalAlignment="Top"/>
+        <Button Content="Register" HorizontalAlignment="Left" Margin="42,221,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.228,0.38" Click="Button_Click_1"/>
 
     </Grid>
 </Window>
