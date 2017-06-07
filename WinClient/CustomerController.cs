@@ -16,9 +16,9 @@ namespace WinClient
         {
             var newCustomer = client.InsertCustomer(username);
 
-            if (!newCustomer.Username.Equals("exists"))
+            if (!newCustomer.Equals("exists"))
             {
-                return newCustomer.Password;
+                return newCustomer.ToString();
             }
 
             return null;

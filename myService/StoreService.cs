@@ -27,7 +27,7 @@ namespace myService
             }
         }
 
-        public CustomerDTO InsertCustomer(string value)
+        public string InsertCustomer(string value)
         {
             Random rnd = new Random();
 
@@ -45,10 +45,10 @@ namespace myService
                     };
                     ctx.Customers.Add(c);
                     ctx.SaveChanges();
-                    return new CustomerDTO { Username = value, Password = "secret" + pass, Saldo = 300 };
+                    return "secret" + pass;
                 }
             }
-            return new CustomerDTO { Username = "exists", Password = "exists", Saldo = 0 };
+            return "exists";
         }
 
         public List<ProductDTO> GetAllProducts()

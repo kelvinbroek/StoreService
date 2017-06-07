@@ -15,83 +15,6 @@ namespace WinClient.ServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CustomerDTO", Namespace="http://schemas.datacontract.org/2004/07/myService")]
-    [System.SerializableAttribute()]
-    public partial class CustomerDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PasswordField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private double SaldoField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string UsernameField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Password {
-            get {
-                return this.PasswordField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
-                    this.PasswordField = value;
-                    this.RaisePropertyChanged("Password");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public double Saldo {
-            get {
-                return this.SaldoField;
-            }
-            set {
-                if ((this.SaldoField.Equals(value) != true)) {
-                    this.SaldoField = value;
-                    this.RaisePropertyChanged("Saldo");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Username {
-            get {
-                return this.UsernameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UsernameField, value) != true)) {
-                    this.UsernameField = value;
-                    this.RaisePropertyChanged("Username");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ProductDTO", Namespace="http://schemas.datacontract.org/2004/07/myService")]
     [System.SerializableAttribute()]
     public partial class ProductDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -178,10 +101,10 @@ namespace WinClient.ServiceReference {
         System.Threading.Tasks.Task<bool> LoginUserAsync(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStoreService/InsertCustomer", ReplyAction="http://tempuri.org/IStoreService/InsertCustomerResponse")]
-        WinClient.ServiceReference.CustomerDTO InsertCustomer(string value);
+        string InsertCustomer(string value);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStoreService/InsertCustomer", ReplyAction="http://tempuri.org/IStoreService/InsertCustomerResponse")]
-        System.Threading.Tasks.Task<WinClient.ServiceReference.CustomerDTO> InsertCustomerAsync(string value);
+        System.Threading.Tasks.Task<string> InsertCustomerAsync(string value);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStoreService/GetAllProducts", ReplyAction="http://tempuri.org/IStoreService/GetAllProductsResponse")]
         WinClient.ServiceReference.ProductDTO[] GetAllProducts();
@@ -243,11 +166,11 @@ namespace WinClient.ServiceReference {
             return base.Channel.LoginUserAsync(username, password);
         }
         
-        public WinClient.ServiceReference.CustomerDTO InsertCustomer(string value) {
+        public string InsertCustomer(string value) {
             return base.Channel.InsertCustomer(value);
         }
         
-        public System.Threading.Tasks.Task<WinClient.ServiceReference.CustomerDTO> InsertCustomerAsync(string value) {
+        public System.Threading.Tasks.Task<string> InsertCustomerAsync(string value) {
             return base.Channel.InsertCustomerAsync(value);
         }
         

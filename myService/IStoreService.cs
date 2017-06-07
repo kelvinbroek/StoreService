@@ -15,7 +15,7 @@ namespace myService
         bool LoginUser(string username, string password);
 
         [OperationContract]
-        CustomerDTO InsertCustomer(string value);
+        string InsertCustomer(string value);
 
         [OperationContract]
         List<ProductDTO> GetAllProducts();
